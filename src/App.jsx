@@ -1118,8 +1118,8 @@ export default function App() {
   if (!started) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-brand-50 via-white to-coyote-50 p-4">
-        <div className="bg-white rounded-2xl shadow-lg p-8 max-w-md w-full text-center border border-brand-100">
-          <img src="/logo.png" alt="Logo" className="w-24 h-24 mx-auto mb-4 rounded-full shadow" />
+        <div className="bg-white rounded-2xl shadow-lg p-8 max-w-lg w-full text-center border border-brand-100">
+          <img src="/logo.png" alt="Logo" className="w-28 h-28 mx-auto mb-4 rounded-full shadow object-cover aspect-square" />
           <p className="text-sm text-brand-600 font-semibold mb-1">{t('welcome', lang)}</p>
           <h1 className="text-2xl font-bold text-brand-800 mb-1">{t('appTitle', lang)}</h1>
           <p className="text-sm text-gray-500 mb-6">{t('appSubtitle', lang)}</p>
