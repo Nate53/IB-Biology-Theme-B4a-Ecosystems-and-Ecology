@@ -233,10 +233,10 @@ Cuando las condiciones abióticas cambian más allá del rango de tolerancia de 
     es: "Una especie de pez prospera entre 15-25°C pero puede sobrevivir entre 5-35°C. ¿Cómo se llama el rango de 15-25°C?"
   },
   chunk3CC1Options: {
-    en: ["Limits of tolerance", "Optimal range", "Zone of stress", "Lethal range"],
-    es: ["Límites de tolerancia", "Rango óptimo", "Zona de estrés", "Rango letal"]
+    en: ["Limits of tolerance", "Zone of stress", "Lethal range", "Optimal range"],
+    es: ["Límites de tolerancia", "Zona de estrés", "Rango letal", "Rango óptimo"]
   },
-  chunk3CC1Correct: { en: 1, es: 1 },
+  chunk3CC1Correct: { en: 3, es: 3 },
   chunk3CC1Explanation: {
     en: "The 15-25°C range where the fish thrives (highest growth and reproduction) is the optimal range. The full 5-35°C range represents the limits of tolerance. The zones between optimal and lethal (5-15°C and 25-35°C) are the zones of stress.",
     es: "El rango de 15-25°C donde el pez prospera (mayor crecimiento y reproducción) es el rango óptimo. El rango completo de 5-35°C representa los límites de tolerancia. Las zonas entre lo óptimo y lo letal (5-15°C y 25-35°C) son las zonas de estrés."
@@ -367,19 +367,19 @@ La distribución de especies de percebes ilustra claramente la zonación — dif
   },
   chunk5CC1Options: {
     en: [
-      "The lower shore has more rocks for organisms to attach to",
-      "The lower shore has more stable abiotic conditions with less exposure time, supporting a wider range of species",
       "Upper shore organisms are killed by predators",
-      "The lower shore receives more sunlight for photosynthesis"
+      "The lower shore receives more sunlight for photosynthesis",
+      "The lower shore has more stable abiotic conditions with less exposure time, supporting a wider range of species",
+      "The lower shore has more rocks for organisms to attach to"
     ],
     es: [
-      "La costa inferior tiene más rocas para que los organismos se adhieran",
-      "La costa inferior tiene condiciones abióticas más estables con menos tiempo de exposición, soportando una mayor variedad de especies",
       "Los organismos de la costa superior son matados por depredadores",
-      "La costa inferior recibe más luz solar para la fotosíntesis"
+      "La costa inferior recibe más luz solar para la fotosíntesis",
+      "La costa inferior tiene condiciones abióticas más estables con menos tiempo de exposición, soportando una mayor variedad de especies",
+      "La costa inferior tiene más rocas para que los organismos se adhieran"
     ]
   },
-  chunk5CC1Correct: { en: 1, es: 1 },
+  chunk5CC1Correct: { en: 2, es: 2 },
   chunk5CC1Explanation: {
     en: "The lower shore is submerged for longer periods, so abiotic conditions (temperature, salinity, moisture) are more stable and marine-like. This less stressful environment allows a wider range of species to survive. The upper shore has extreme and variable conditions that only a few highly tolerant species can endure.",
     es: "La costa inferior está sumergida por períodos más largos, por lo que las condiciones abióticas (temperatura, salinidad, humedad) son más estables y más marinas. Este ambiente menos estresante permite que una mayor variedad de especies sobrevivan. La costa superior tiene condiciones extremas y variables que solo unas pocas especies altamente tolerantes pueden soportar."
@@ -668,8 +668,9 @@ const ConceptCheckMCQ = ({ question, options, correctIndex, explanation, lang })
   );
 };
 
-// Short-answer concept check
+// Short-answer concept check with student text input
 const ConceptCheckShortAnswer = ({ question, answer, lang }) => {
+  const [studentAnswer, setStudentAnswer] = useState('');
   const [revealed, setRevealed] = useState(false);
   return (
     <div className="concept-check-box">
@@ -678,12 +679,20 @@ const ConceptCheckShortAnswer = ({ question, answer, lang }) => {
         <span className="font-bold text-amber-800">{t('conceptCheck', lang)}</span>
       </div>
       <p className="text-gray-800 font-medium mb-3">{question}</p>
+      <textarea
+        className="w-full border border-amber-200 rounded-lg p-3 text-sm min-h-[80px] mb-3 focus:ring-2 focus:ring-amber-400 focus:border-amber-400 outline-none bg-white"
+        placeholder={t('yourAnswer', lang)}
+        value={studentAnswer}
+        onChange={(e) => setStudentAnswer(e.target.value)}
+        disabled={revealed}
+      />
       {!revealed ? (
         <button onClick={() => setRevealed(true)} className="px-4 py-2 bg-amber-500 text-white rounded-lg text-sm font-semibold hover:bg-amber-600 transition">
           {t('revealAnswer', lang)}
         </button>
       ) : (
         <div className="bg-green-50 border border-green-200 rounded-lg p-3 text-sm text-green-800">
+          <p className="text-xs font-bold text-green-700 mb-1">{t('modelAnswer', lang)}</p>
           <ContentRenderer text={answer} />
         </div>
       )}
